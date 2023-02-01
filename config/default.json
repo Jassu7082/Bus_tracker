@@ -1,0 +1,4 @@
+{
+    "jwtToken":"rootmax",
+    "mongoURI":"mongodb+srv://root:root@cluster0.krnmeu5.mongodb.net/?retryWrites=true&w=majority"
+}
