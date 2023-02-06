@@ -5,6 +5,8 @@ const app = express();
 
 connectDB();
 app.use(express.json({extended : false}))
+const cors =require("cors");
+app.use(cors({origin:true}));
 app.get("/",(req,res)=> res.send("API running"));
 
 //Define Routes

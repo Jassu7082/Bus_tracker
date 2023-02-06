@@ -1,10 +1,17 @@
-import React, { useState } from "react";
-import { Link,redirect } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link,redirect, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
 
 function Login({login,isAuthenticated}) {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(isAuthenticated){
+      return navigate("/map");
+    }
+  },[isAuthenticated]);
+
   const [formData,setFormData]=useState(
     {
       email:"",
@@ -19,10 +26,12 @@ function Login({login,isAuthenticated}) {
       login(email,password);
     };
 
-    //redirect 
-    if(isAuthenticated){
-      return (redirect("/map"));
-    };
+    // //redirect 
+    // if(isAuthenticated){
+    //   const navigate = useNavigate();
+    //   return navigate("/map");
+    // }
+   
   return (
     <div>
       <section className="container1">
