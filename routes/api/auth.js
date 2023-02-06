@@ -8,28 +8,11 @@ const {check ,validationResult}= require("express-validator");
 const config = require("config");
 
 
-
-function verifyToken(req, res, next) {
-    const token = req.header("x-auth-token");
-    console.log(token);
-    if (!token) {
-      return res.status(401).json({ msg: "No token, authorization denied" });
-    }
-    try {
-      const decoded = jwt.verify(token, "rootmax");
-      req.user = decoded.user;
-      console.log(req.user.id);
-      console.log("--------------");
-      next();
-    } catch (err) {
-      res.status(401).json({ msg: "Token is not valid" });
-    }
-  }
 // @route  GET api/auth
 // @desc   Test route
 // @access Public
 
-router.get("/",verifyToken(req, res, next), async (req,res)=> {
+router.get("/",auth, async (req,res)=> {
     try{
         var id=req.user.id;
         console.log(id);
