@@ -1,23 +1,40 @@
-#MERN_AUTH
-A full-stack application built with Node.js, Express.js, Mongoose, and React.js.
+# MERN_AUTH
 
->**Functionalities**
-- Authentication
+Built with Node js, Express js, Mongoose (Object Modeling for MongoDB), React Js.
+
+## Functionalities
+
+- Authorization
 - JWT Authentication
->**Tech Stack**
-- Frontend: React.js
-- Backend: Express.js
+
+## Tech
+
+- Frontend: React Js
+- Backend: Express js
 - Database: MongoDB Atlas
->**Installation**
-1. Clone this repository
-2.Install npm dependencies in the root directory and in the client directory:
-   `$ cd client && npm install
-   $ npm install`
-3.Set up a MongoDB database either locally or provision a free database with MongoDB Atlas.
-4.Set up the required environment variables:
-`MONGO_URI=Your_MONGO_URL
-JWT_SECRET=YOUR_SECRET_KEY
-JWT_LIFETIME=TIME`
-5.Create a .env file in the config/default.json directory.
-6.Navigate to the root directory and run the following command to start the application:
-`npm run dev`
+- Routing: React Router Dom V6
+
+## Installation
+
+### Clone
+
+Clone this repo with the following URL: https://github.com/
+
+### Setup
+
+1. Install npm dependencies using `npm install`.
+
+$ cd client && npm install
+$ npm install
+
+2. Set up a MongoDB database either locally or provision a free database with MongoDB Atlas.
+
+3. Set up the required environment variables:
+
+MONGO_URI=Your_MONGO_URL
+jwtToken=YOUR_SECRET_KEY
+
+4. Create a `.env` file in the `config/default.json` directory.
+
+5. Navigate to the directory and run the following command to start:
+$npm run dev
