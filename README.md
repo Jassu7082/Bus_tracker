@@ -1,4 +1,4 @@
-MERN_AUTH
+(*MERN_AUTH*)
 A full-stack application built with Node.js, Express.js, Mongoose, and React.js.
 
 Functionalities
