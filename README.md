@@ -24,17 +24,17 @@ Clone this repo with the following URL: https://github.com/
 
 1. Install npm dependencies using `npm install`.
 
-$ cd client && npm install
-$ npm install
+```$ cd client && npm install
+$ npm install```
 
 2. Set up a MongoDB database either locally or provision a free database with MongoDB Atlas.
 
 3. Set up the required environment variables:
 
-MONGO_URI=Your_MONGO_URL
-jwtToken=YOUR_SECRET_KEY
+```MONGO_URI=Your_MONGO_URL
+jwtToken=YOUR_SECRET_KEY```
 
 4. Create a `.env` file in the `config/default.json` directory.
 
 5. Navigate to the directory and run the following command to start:
-$npm run dev
+```$ npm run dev```
