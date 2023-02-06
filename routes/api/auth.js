@@ -6,18 +6,14 @@ const auth = require("../../middleware/auth");
 const jwt = require("jsonwebtoken");
 const {check ,validationResult}= require("express-validator");
 const config = require("config");
-
-
 // @route  GET api/auth
 // @desc   Test route
 // @access Public
 
 router.get("/",auth, async (req,res)=> {
     try{
-        var id=req.user.id;
-        console.log(id);
-        const user1 = await User.findById(id);
-        res.json(user1);
+        const user = await User.findById(req.user.id).select("-password");
+        res.json(user);
     } catch(err){
         console.log(err.message);
         res.status(500).send("Server Error");

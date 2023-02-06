@@ -11,7 +11,6 @@ module.exports =function(req,res,next){
         var decoded = jwt.verify(token,"rootmax");
         req.user = decoded.user;
         console.log(req.user.id );
-        console.log("--------------")
         next();
     } catch(err) {
          res.status(401).json({msg:"token is not valid"});

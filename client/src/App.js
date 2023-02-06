@@ -13,7 +13,7 @@ import { loadUser } from "./actions/auth";
 import { Provider } from "react-redux";
 import Store from "./store";
 import store from "./store";
-// import setAuthToken from "./utilies/setAuthToken";
+import setAuthToken from "./utilies/setAuthToken";
 
 
 export default function App() {

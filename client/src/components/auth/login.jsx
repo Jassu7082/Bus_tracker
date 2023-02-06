@@ -13,8 +13,8 @@ function Login({login,isAuthenticated}) {
   );
   const {email,password}= formData;
   const onChange = e => setFormData({...formData,[e.target.name]:e.target.value});
-
-    const onSubmit =async e =>{
+    console.log(formData);
+    const onSubmit = async e =>{
       e.preventDefault();
       login(email,password);
     };
@@ -46,7 +46,7 @@ function Login({login,isAuthenticated}) {
             value={password} onChange={e=> onChange(e)} required
           />
         </div>
-        <input type="submit" className="btn btn-primary" value="Login" />
+        <input onClick={e=>onSubmit(e)} className="btn btn-primary" value="Login" />
       </form>
       <p className="my-1">
         Don't have an account? <Link to="/register">Sign Up</Link>
