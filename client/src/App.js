@@ -5,7 +5,7 @@ import Home from "../src/components/layout/home";
 import Dlogin from "../src/components/auth/dlogin";
 import Register from "../src/components/auth/register";
 import Login from "../src/components/auth/login";
-import  Direction  from "./components/layout/Direction";
+import  Direction  from "./components/userdata/Direction";
 import Alert from "./components/layout/Alert";
 import Navbar from "./components/layout/Navbar";
 import { loadUser } from "./actions/auth";

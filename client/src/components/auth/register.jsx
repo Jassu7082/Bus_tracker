@@ -1,10 +1,11 @@
-import React, { useState } from "react";
-import { Link,redirect} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link,useNavigate} from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register} from "../../actions/auth";
 import PropTypes from "prop-types";
 function Register({setAlert,register,isAuthenticated}) {
+  const navigate = useNavigate();
   const [formData,setFormData]=useState(
     {
       name:"",
@@ -26,9 +27,11 @@ function Register({setAlert,register,isAuthenticated}) {
         register({name,email,phone,password});
       }
     };
-    if(isAuthenticated){
-      return redirect("/map");
-    }
+    useEffect(() => {
+      if(isAuthenticated){
+        return navigate("/map");
+      }
+    },[isAuthenticated]);
     return (
     <div>
        <section className="container1">
@@ -75,7 +78,7 @@ function Register({setAlert,register,isAuthenticated}) {
           />
       <input type="checkbox" onClick={() => setShowPassword1(!showPassword1)} />
         </div>
-        <input type="submit" className="btn btn-primary" value="Register" />
+        <button onClick={e => onSubmit(e)} className="btn btn-primary" value="Register">Submit</button>
       </form>
       <p className="my-1">
         Already have an account? <Link to="/login">Sign In</Link>
