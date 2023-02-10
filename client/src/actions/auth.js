@@ -1,6 +1,6 @@
 import axios from "axios";
 import { REGISTER_FAIL,REGISTER_SUCCESS,USER_LOADED,AUTH_ERROR } from "./types";
-import { LOGIN_FAIL,LOGIN_SUCCESS,LOGOUT } from "./types";
+import { LOGIN_FAIL,LOGIN_SUCCESS,LOGOUT ,DLOGIN_FAIL,DLOGIN_SUCCESS} from "./types";
 import setAuthToken from "../utilies/setAuthToken"
 import { setAlert } from "./alert";
 
@@ -85,4 +85,39 @@ export const login =(email,password)=>async dispatch=>{
 
 export const logout=()=> dispatch=>{
     dispatch({type:LOGOUT});
+}
+
+
+//Dlogin
+export const dlogin =(email,password)=>async dispatch=>{
+    // const config={
+    //     headers:{
+    //         "Content-Type":"application/json"
+    //     }
+    // }
+    // const body =JSON.stringify({email,password});
+
+    try{
+        const res = await axios({
+            method: "post",
+            url:"/api/dauth",
+            data:{email,password}
+        });
+        
+        dispatch({
+            type:DLOGIN_SUCCESS,
+            payload: res.data
+        });
+
+        dispatch(loadUser());
+    } catch(err){
+        const errors= err.response.data.errors;
+        if(errors){
+            errors.forEach(error => dispatch(setAlert(error.msg,"danger")));        
+        }
+        dispatch({
+            type:DLOGIN_FAIL
+        });
+    }
+
 }

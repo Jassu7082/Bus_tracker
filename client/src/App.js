@@ -14,7 +14,7 @@ import { Provider } from "react-redux";
 import Store from "./store";
 import store from "./store";
 import setAuthToken from "./utilies/setAuthToken";
-
+import Driver from "./components/userdata/Driver";
 
 export default function App() {
   useEffect(()=>{
@@ -32,6 +32,7 @@ export default function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/map" element={<Direction/>} />
+            <Route path="/driver" element={<Driver/>} />
           </Routes>
         </div>
       </Router>

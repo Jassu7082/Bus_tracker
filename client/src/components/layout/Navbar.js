@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
 
-function Navbar({auth:{isAuthenticated,loading},logout}) {
+function Navbar({auth:{isAuthenticated,isDAuthenticated,loading},logout}) {
   const authLinks=(
     <ul>
       <li>
@@ -34,6 +34,13 @@ function Navbar({auth:{isAuthenticated,loading},logout}) {
             </li>
           </ul>
   );
+  const dLinks=(
+    <ul>
+            <li>
+              <Link to="/driver">Login </Link>
+            </li>
+    </ul>
+  );
   return (
     <nav className="navbar bg-dark">
           <h1>
@@ -41,7 +48,11 @@ function Navbar({auth:{isAuthenticated,loading},logout}) {
               <i className="fas fa-code"></i>Track Bus
             </Link>
           </h1>
-          { !loading && <Fragment>{isAuthenticated ? authLinks : guestLinks}</Fragment>}
+          { !loading && 
+        <Fragment>
+          {isAuthenticated ? authLinks : (isDAuthenticated ? dLinks : guestLinks)}
+        </Fragment>
+      }
         </nav>
   );
 };
