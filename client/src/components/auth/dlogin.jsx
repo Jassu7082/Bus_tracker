@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { dlogin } from "../../actions/auth";
+import Navbar from "../layout/Navbar";
 
 function Dlogin({dlogin,isDAuthenticated}) {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ function Dlogin({dlogin,isDAuthenticated}) {
     // }
    
   return (
+    <Fragment>
+    <Navbar/>
     <div>
       <section className="container1">
       <h1 className="large text-primary">Sign In</h1>
@@ -61,6 +64,7 @@ function Dlogin({dlogin,isDAuthenticated}) {
       </p>
     </section>
     </div>
+    </Fragment>
   );
 };
 Dlogin.propTypes={

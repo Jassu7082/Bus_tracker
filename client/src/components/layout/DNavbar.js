@@ -5,34 +5,31 @@ import PropTypes from "prop-types";
 import { logout } from "../../actions/auth";
 
 
-function Navbar({auth:{isAuthenticated,loading},logout}) {
-  const authLinks=(
+function Navbar({auth:{isDAuthenticated,loading},logout}) {
+    const guestLinks=(
+        <ul>
+                <li>
+                  <Link to="/dlogin">Driver </Link>
+                </li>
+                <li>
+                  <Link to="/register">Register </Link>
+                </li>
+                <li>
+                  <Link to="/login">Login </Link>
+                </li>
+              </ul>
+      );
+  const dLinks=(
     <ul>
-      <li>
-          <Link to="/map">Directions </Link>
-      </li>
-      <li>
-
-      </li>
-      <li>
-        <a onClick={logout} href="#!">
-        <i className="fas fa-sign-out-alt"></i>{''}
-        <span className="hide-sm">Logout</span></a>
-      </li>
+            <li>
+              <Link to="/driver">Driver </Link>
+            </li>
+            <li>
+                <a onClick={logout} href="#!">
+                <i className="fas fa-sign-out-alt"></i>{''}
+                <span className="hide-sm">Logout</span></a>
+            </li>
     </ul>
-  );
-  const guestLinks=(
-    <ul>
-            <li>
-              <Link to="/dlogin">Driver </Link>
-            </li>
-            <li>
-              <Link to="/register">Register </Link>
-            </li>
-            <li>
-              <Link to="/login">Login </Link>
-            </li>
-          </ul>
   );
   return (
     <nav className="navbar bg-dark">
@@ -43,7 +40,7 @@ function Navbar({auth:{isAuthenticated,loading},logout}) {
           </h1>
           { !loading && 
         <Fragment>
-          {isAuthenticated ? authLinks :  guestLinks}
+           {dLinks}
         </Fragment>
       }
         </nav>

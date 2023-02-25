@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link,useNavigate} from "react-router-dom";
 import { connect } from "react-redux";
 import { setAlert } from "../../actions/alert";
 import { register} from "../../actions/auth";
 import PropTypes from "prop-types";
+import Navbar from "../layout/Navbar";
 function Register({setAlert,register,isAuthenticated}) {
   const navigate = useNavigate();
   const [formData,setFormData]=useState(
@@ -33,6 +34,8 @@ function Register({setAlert,register,isAuthenticated}) {
       }
     },[isAuthenticated]);
     return (
+      <Fragment>
+      <Navbar/>
     <div>
        <section className="container1">
       <h1 className="large text-primary">Sign Up</h1>
@@ -85,6 +88,7 @@ function Register({setAlert,register,isAuthenticated}) {
       </p>
     </section>
     </div>
+    </Fragment>
   );
 }
 Register.propTypes={

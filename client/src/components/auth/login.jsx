@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login } from "../../actions/auth";
+import Navbar from "../layout/Navbar";
 
 function Login({login,isAuthenticated}) {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ function Login({login,isAuthenticated}) {
     // }
    
   return (
+    <Fragment>
+    <Navbar/>
     <div>
       <section className="container1">
       <h1 className="large text-primary">Sign In</h1>
@@ -61,6 +64,7 @@ function Login({login,isAuthenticated}) {
       </p>
     </section>
     </div>
+    </Fragment>
   );
 };
 Login.propTypes={

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import mapboxgl from "mapbox-gl";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../actions/auth";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import io from "socket.io-client";
-const socket=io.connect("http://localhost:5000");
-
+import Navbar from "../layout/Navbar";
+import { getData } from "../../actions/location";
 const Direction = ({ login,isAuthenticated }) => {
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,24 +13,26 @@ const Direction = ({ login,isAuthenticated }) => {
       return navigate("/");
     }
   },[isAuthenticated]);
+  
   const [duration, setDuration] = useState(0);
   const [route, setRoute] = useState(null);
   const u_long = localStorage.getItem("u_long");
   const u_lat = localStorage.getItem("u_lat");
-  // const d_long = localStorage.getItem("d_long");
-  // const d_lat = localStorage.getItem("d_lat");
-  const d_long = "72.7571";
-  const d_lat = "21.1452";
+  const d_long = localStorage.getItem("d_long");
+  const d_lat = localStorage.getItem("d_lat");
+// const d_long="72.7739";
+// const d_lat="21.1615";
   let durationm = Math.floor(duration / 60);
+
   useEffect(() => {
     let previousPosition;
-  
+    
     const getLocation = () => {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(showPosition);
       }
     };
-  
+    
     const showPosition = (position) => {
       if (!previousPosition || (position.coords.longitude !== previousPosition.coords.longitude || position.coords.latitude !== previousPosition.coords.latitude)) {
         localStorage.setItem("u_long", position.coords.longitude);
@@ -39,12 +40,17 @@ const Direction = ({ login,isAuthenticated }) => {
         previousPosition = position;
       }
     };
-  
+    const intervalId1 = setInterval(getData, 100);
     const intervalId = setInterval(getLocation, 100);
-  
+    
     return () => clearInterval(intervalId);
   }, []);
   
+ 
+
+
+
+
   useEffect(() => {
     mapboxgl.accessToken = "pk.eyJ1IjoidTIxY3MwODEiLCJhIjoiY2xjcTFqamc3MDFsYjNvbWt2NzIwcDhldiJ9.eOKzvN9IbCDTewJmXzfIPg";
     fetch(
@@ -103,14 +109,14 @@ const Direction = ({ login,isAuthenticated }) => {
         maxZoom: 14
       });
 
-      setInterval(function() {
-        map.jumpTo({
-          center: [u_long, u_lat],
-          zoom: 17,
-          bearing: 0,
-          pitch: 0
-        });
-      }, 7000);
+      // setInterval(function() {
+      //   map.jumpTo({
+      //     center: [u_long, u_lat],
+      //     zoom: 17,
+      //     bearing: 0,
+      //     pitch: 0
+      //   });
+      // }, 7000);
       
 
 
@@ -120,6 +126,8 @@ const Direction = ({ login,isAuthenticated }) => {
   }, [route, u_lat, u_long, d_lat, d_long]);
 
   return (
+    <Fragment>
+    <Navbar/>
     <div className="map">
       {route ? (
         <div id="map" style={{ height: "400px", width: "100%" }} />
@@ -130,6 +138,7 @@ const Direction = ({ login,isAuthenticated }) => {
         <p>Duration: {durationm} minutes</p>
       </div>
     </div>
+    </Fragment>
   );
 };
 Direction.propTypes={

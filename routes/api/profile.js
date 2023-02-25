@@ -7,13 +7,14 @@ const auth =require("../../middleware/auth");
 // @access Private
 const Location = require("../../models/location");
 const User = require("../../models/User");
-router.get("/me",auth, async (req,res)=> {
+router.get("/",auth, async (req,res)=> {
+    console.log("inside");
     try{
-        const profile = await Location.findOne({user:req.user.id}).populate("user",["name","avator"]);
+        const profile = await Location.findOne({user:"63e2bc14eb87b1a81a0f7d47"});
+        console.log(profile);
         if(!profile){
             return res.status(400).json({msg:"there is no profile for this user"});
-            
-        }
+        } else return res.json(profile);
     } catch(err){
         console.log(err.message);
         res.status(500).send("Server Error");
@@ -43,44 +44,23 @@ router.post("/",[
     if(longitude) profileFields.longitude=longitude;
     if(latitude) profileFields.latitude=latitude;
     try{
-        let profile = await Location.findOne({user: req.user.id});
+        let profile = await Location.findOne( {user:req.user.id});
         if (profile) {
-            await Location.findOneAndUpdate(
+            profile = await Location.findOneAndUpdate(
                 { user: req.user.id },
                 { $set: { "longitude": profileFields.longitude, "latitude": profileFields.latitude } },
-                { new: true },
-                (err, updatedProfile) => {
-                    if (err) {
-                        return res.status(400).json({ errors: [{ msg: err.message }] });
-                    }
-                    return res.json(updatedProfile);
-                }
-                );
-            return
-          };
+                { new: true }
+            );
+            return res.json(profile);
+        };
         profile = new Location(profileFields);
         await profile.save();
-         res.json(profile);
+        return res.json(profile);
     }catch (err){
         console.log(err.message);
         res.status(500).send("Server Error");
     }
 });
 
-
-// @route  delete api/profile
-// @desc   delete user profile
-// @access Private
-router.delete("/",auth,async(req,res)=>{
-    try{
-        await Location.findOneAndRemove({user:req.user.id});
-        await User.findOneAndRemove({ _id:req.user.id});
-
-        res.json({msg:"user removed"});
-    } catch(err){
-        console.error(err.message);
-        res.status(500).send("Server Error");
-    }
-})
 
 module.exports = router;

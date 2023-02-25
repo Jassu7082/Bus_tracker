@@ -7,7 +7,6 @@ import Register from "../src/components/auth/register";
 import Login from "../src/components/auth/login";
 import  Direction  from "./components/userdata/Direction";
 import Alert from "./components/layout/Alert";
-import Navbar from "./components/layout/Navbar";
 import { loadUser } from "./actions/auth";
 // redux
 import { Provider } from "react-redux";
@@ -23,7 +22,7 @@ export default function App() {
   return (
       <Provider store={Store}>
       <Router>
-      <Navbar/>
+      
         <div>
           <Alert/>
           <Routes>

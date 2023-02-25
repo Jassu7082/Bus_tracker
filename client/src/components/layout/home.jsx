@@ -1,8 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import Navbar from "./Navbar";
 
 function Home() {
   return (
+    <Fragment>
+    <Navbar/>
     <div>
       <section className="landing">
       <div className="dark-overlay">
@@ -19,6 +22,7 @@ function Home() {
       </div>
     </section>
     </div>
+    </Fragment>
   );
 }
 
